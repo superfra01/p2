@@ -154,7 +154,7 @@ public class ProdottoDao implements ProdottoDaoInterfaccia{
 		String selectSQL = "SELECT * FROM " + ProdottoDao.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
+			selectSQL += " ORDER BY ?";
 		}
 
 		try {
@@ -162,6 +162,7 @@ public class ProdottoDao implements ProdottoDaoInterfaccia{
 			preparedStatement = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStatement.executeQuery();
+			preparedStatement.setString(1, selectSQL);
 
 			while (rs.next()) {
 				ProdottoBean bean = new ProdottoBean();
